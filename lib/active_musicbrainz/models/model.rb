@@ -11,7 +11,7 @@ module ActiveMusicbrainz
 
     Factory.define do
       model :artist do
-        has_many    :artist_credit_name, foreign_key: :artist
+        has_many    :artist_credit_names, foreign_key: :artist
         has_many    :artist_credits, through: :artist_credit_name
         has_many    :release_groups, through: :artist_credits
         has_many    :releases, through: :release_groups
