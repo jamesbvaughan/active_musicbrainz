@@ -16,11 +16,11 @@ module ActiveMusicbrainz
     Factory.define do
       model :artist do
         has_many    :credit_names, foreign_key: :artist, class_name: 'ArtistCreditName'
-        has_many    :credits, through: :artist_credit_name, class_name: 'ArtistCredit'
-        has_many    :release_groups, through: :artist_credits
+        has_many    :credits, through: :credit_names, class_name: 'ArtistCredit'
+        has_many    :release_groups, through: :credits
         has_many    :releases, through: :release_groups
-        has_many    :recordings, through: :artist_credits
-        has_many    :tracks, through: :artist_credits
+        has_many    :recordings, through: :credits
+        has_many    :tracks, through: :credits
         has_many    :aliases, foreign_key: :artist, class_name: 'ArtistAlias'
         has_many    :l_artist_urls, foreign_key: :entity0
         has_many    :urls, through: :l_artist_urls
@@ -42,7 +42,7 @@ module ActiveMusicbrainz
 
       model :artist_credit do
         has_many    :credit_names, foreign_key: :artist_credit, class_name: 'ArtistCreditName'
-        has_many    :artists, through: :artist_credit_names
+        has_many    :artists, through: :credit_names
         has_many    :recordings, foreign_key: :artist_credit
         has_many    :tracks, foreign_key: :artist_credit
         has_many    :releases, foreign_key: :artist_credit
@@ -81,8 +81,8 @@ module ActiveMusicbrainz
       end
 
       model :track do
-        belongs_to  :track_recording, foreign_key: :recording
-        belongs_to  :track_medium, foreign_key: :medium
+        belongs_to  :recording, foreign_key: :recording
+        belongs_to  :medium, foreign_key: :medium
         has_one     :release, through: :medium
         has_artist_credits
         has_gid
