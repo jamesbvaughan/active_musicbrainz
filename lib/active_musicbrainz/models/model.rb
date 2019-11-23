@@ -105,8 +105,14 @@ module ActiveMusicbrainz
         belongs_to  :release_group_type, class_name: 'ReleaseGroupPrimaryType', foreign_key: :type
         has_many    :release_group_secondary_type_joins, foreign_key: :release_group
         has_many    :secondary_types, through: :release_group_secondary_type_joins, source: :type
+        has_many    :urls, through: :l_release_group_urls
         has_artist_credits
         has_gid
+      end
+
+      model :l_release_group_url do
+        belongs_to  :release_group, foreign_key: :entity0
+        belongs_to  :url, foreign_key: :entity1
       end
 
       model :release do
