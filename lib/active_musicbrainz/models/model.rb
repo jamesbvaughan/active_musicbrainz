@@ -41,6 +41,16 @@ module ActiveMusicbrainz
       end
 
       model :link_type do
+        has_many    :link_attribute_types, through: :link_type_attribute_types
+        has_many    :link_type_attribute_types, foreign_key: :link_type
+      end
+
+      model :link_type_attribute_type do
+        belongs_to  :link_type, foreign_key: :link_type
+        belongs_to  :link_attribute_type, foreign_key: :attribute_type
+      end
+
+      model :link_attribute_type do
       end
 
       model :artist_credit_name do
