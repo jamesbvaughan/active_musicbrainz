@@ -78,6 +78,8 @@ module ActiveMusicbrainz
       model :url do
         has_many    :l_artist_urls, foreign_key: :entity1
         has_many    :artists, through: :l_artist_urls
+        has_many    :l_release_group_urls, foreign_key: :entity1
+        has_many    :release_groups, through: :l_release_group_urls
       end
 
       model :track do
