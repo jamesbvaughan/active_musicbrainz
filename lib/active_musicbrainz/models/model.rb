@@ -134,6 +134,7 @@ module ActiveMusicbrainz
       model :l_release_group_url do
         belongs_to  :release_group, foreign_key: :entity0
         belongs_to  :url, foreign_key: :entity1
+        belongs_to  :link, foreign_key: :link
       end
 
       model :release do
