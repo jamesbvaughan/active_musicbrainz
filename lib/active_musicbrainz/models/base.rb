@@ -3,6 +3,10 @@ module ActiveMusicbrainz
     class Base < ActiveRecord::Base
       self.abstract_class = true
 
+      def readonly?
+        true
+      end
+
       def self.has_artist_credits
         belongs_to  :artist_credit, foreign_key: :artist_credit
         has_many    :artist_credit_names, through: :artist_credit
